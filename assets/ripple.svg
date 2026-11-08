@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 44" width="240" height="88">
+  <!-- Вода перед зверем: закрывает низ головы, будто он сидит в источнике -->
+  <path d="M4 14 C20 8 34 12 46 12 C56 12 64 8 76 8 C88 8 98 12 116 14 C120 28 96 42 60 42 C24 42 0 28 4 14 Z" fill="#7fd3dd" opacity="0.94"/>
+  <path d="M4 14 C0 28 24 42 60 42 C96 42 120 28 116 14 C110 30 90 37 60 37 C30 37 10 30 4 14 Z" fill="#5fbccb" opacity="0.95"/>
+  <path d="M10 15 C24 10 36 14 48 14 C58 14 66 10 76 10 C88 10 100 14 112 15" fill="none" stroke="#c6f1f4" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M30 26 Q44 30 58 26 M70 28 Q82 31 94 28" fill="none" stroke="#c6f1f4" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+</svg>

@@ -1,0 +1,20 @@
+# Godot cache (regenerated automatically on import)
+.godot/
+*.tmp
+
+# Builds go to GitHub Releases, not into the repo
+exports/
+*.zip
+*.apk
+*.aab
+*.exe
+*.pck
+
+# Android signing keys must never be published
+*.keystore
+*.jks
+
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
