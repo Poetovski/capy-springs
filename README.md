@@ -3,7 +3,7 @@
 A cozy idle clicker with a story, made in **Godot 4** with **GDScript**.
 Capy the capybara sits in a frozen hot spring and warms the valley back to life with zen. Friends come back, the snow melts, and the story unfolds over three books and 24 chapters.
 
-**▶ Play in the browser:** https://poetiha.itch.io/capy-springs
+**▶ Play in the browser:** https://poetiha.itch.io/capy-springs · **What's new:** [CHANGELOG](CHANGELOG.md)
 
 | Start | Night by the spring | Book Three | Upgrades | Achievements |
 |---|---|---|---|---|

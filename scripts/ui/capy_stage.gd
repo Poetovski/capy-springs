@@ -319,6 +319,7 @@ func _float_done(l: Label) -> void:
 ## Все мысли, которые подходят сейчас: общие, по главе и про друзей в источнике.
 func thought_pool() -> Array:
 	var pool: Array = D.CAPY_THOUGHTS.duplicate()
+	pool.append_array(D.CAPY_THOUGHTS_MEME)
 	for t in D.CAPY_THOUGHTS_BOOK2:
 		if Game.chapter >= int(t["ch"]):
 			pool.append(t)

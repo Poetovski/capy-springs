@@ -299,6 +299,51 @@ const CAPY_THOUGHTS: Array = [
 	{"ru": "Если тебе грустно — я подвинусь. Тут всем хватит места.", "en": "If you're feeling down, I'll scoot over. There's room for everyone here."},
 ]
 
+## Короткие мемные фразы: современный сленг и интернет-мемы, без грубостей.
+## Идут в общий пул мыслей, поэтому появляются не чаще остальных.
+const CAPY_THOUGHTS_MEME: Array = [
+	{"ru": "Просто чилл-капибара.", "en": "Just a chill capybara."},
+	{"ru": "Вайб-чек: пройден.", "en": "Vibe check: passed."},
+	{"ru": "Это база.", "en": "This is the way."},
+	{"ru": "Я в ресурсе.", "en": "Fully recharged."},
+	{"ru": "Сидим, кайфуем.", "en": "Just vibing."},
+	{"ru": "POV: ты нашёл самое тёплое место.", "en": "POV: you found the warmest spot."},
+	{"ru": "Режим «не беспокоить» включён.", "en": "Do Not Disturb: on."},
+	{"ru": "Не лень, а энергосбережение.", "en": "Not lazy. Power-saving mode."},
+	{"ru": "Потрогай траву. Я вот сижу прямо в ней.", "en": "Touch grass? I'm sitting in it."},
+	{"ru": "Мандарин — это мой аксессуар.", "en": "The mandarin is my accessory."},
+	{"ru": "Голова пустая, вода тёплая.", "en": "Brain empty. Water warm."},
+	{"ru": "Энергия главного героя.", "en": "Main character energy."},
+	{"ru": "Слэй. Медленно.", "en": "Slay. Slowly."},
+	{"ru": "Это не баг, это фича.", "en": "It's not a bug, it's a feature."},
+	{"ru": "Кринж? Нет, кайф.", "en": "Cringe? No. Bliss."},
+	{"ru": "Жиза.", "en": "Big mood."},
+	{"ru": "Рил ток: тут хорошо.", "en": "Real talk: it's nice here."},
+	{"ru": "Живу свою лучшую жизнь.", "en": "Living my best life."},
+	{"ru": "Не душни, тут и так тепло.", "en": "Don't be a buzzkill, it's warm enough."},
+	{"ru": "Я и есть мем.", "en": "I am the meme."},
+	{"ru": "Это спа-день. Каждый день.", "en": "It's giving spa day. Every day."},
+	{"ru": "Без паники. Я капибара.", "en": "Don't panic. I'm a capybara."},
+	{"ru": "Минутка тишины. Или десять.", "en": "A minute of silence. Or ten."},
+	{"ru": "Зарядка: 100%. Желание двигаться: 0%.", "en": "Battery: 100%. Will to move: 0%."},
+	{"ru": "Мне норм.", "en": "I'm good."},
+	{"ru": "Ставлю лайк этому дню.", "en": "Liking this day. Subscribed."},
+	{"ru": "Бро просто отдыхает.", "en": "Bro is just resting."},
+	{"ru": "Живу в этом источнике бесплатно.", "en": "Living rent-free in this hot spring."},
+	{"ru": "Съела мандарин, не оставила ни дольки.", "en": "Ate the mandarin. Left no crumbs."},
+	{"ru": "Ой, всё. Я отдыхаю.", "en": "That's it. I'm resting."},
+	{"ru": "Сначала чилл, потом всё остальное.", "en": "Chill first, everything else later."},
+	{"ru": "Мой стиль — «уютно».", "en": "My aesthetic: cozy."},
+	{"ru": "Плюс вайб, минус стресс.", "en": "Plus vibes, minus stress."},
+	{"ru": "Это мой комфорт-контент.", "en": "This is my comfort content."},
+	{"ru": "Пусть все подождут. Я в источнике.", "en": "Everyone can wait. I'm in the spring."},
+	{"ru": "Тапай, не стесняйся.", "en": "Tap away, don't be shy."},
+	{"ru": "Проснулась. Покайфовала. Уснула.", "en": "Woke up. Vibed. Slept."},
+	{"ru": "Достигла дзена. Сохранить?", "en": "Zen achieved. Save progress?"},
+	{"ru": "Капибара одобряет.", "en": "Capybara approved."},
+	{"ru": "Ничего не делаю, и у меня отлично получается.", "en": "Doing nothing, and nailing it."},
+]
+
 ## Мысли о друзьях: появляются, только если этот друг сейчас в источнике ("f" — icon).
 const CAPY_THOUGHTS_FRIENDS: Array = [
 	{"f": "chick", "ru": "Цыплёнок опять пытается нырнуть. Получается только поплавать.", "en": "Chick is trying to dive again. All he manages is floating."},

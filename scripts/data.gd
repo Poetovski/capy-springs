@@ -101,6 +101,7 @@ const FRIEND_LINES: Dictionary = Story.FRIEND_LINES
 const CAPY_THOUGHTS: Array = Story.CAPY_THOUGHTS
 const CAPY_THOUGHTS_BOOK2: Array = Story.CAPY_THOUGHTS_BOOK2
 const CAPY_THOUGHTS_FRIENDS: Array = Story.CAPY_THOUGHTS_FRIENDS
+const CAPY_THOUGHTS_MEME: Array = Story.CAPY_THOUGHTS_MEME
 const EVENTS: Array = Story.EVENTS
 
 ## Индексы первых глав второй и третьей книги (разделители во вкладке «История»).
