@@ -190,7 +190,12 @@ func helper_zps_each(i: int) -> float:
 
 ## Постоянный множитель: мандарины (+5% каждый) и достижения (+2% каждое).
 func prestige_mult() -> float:
-	return (1.0 + 0.05 * float(mandarins)) * achievement_mult()
+	return (1.0 + D.MANDARIN_BONUS * float(mandarins)) * achievement_mult()
+
+
+## Бонус мандаринов в процентах (для подписей в интерфейсе).
+func mandarin_pct() -> int:
+	return int(round(float(mandarins) * D.MANDARIN_BONUS * 100.0))
 
 
 func achievement_mult() -> float:
@@ -243,13 +248,24 @@ func helper_max_affordable(i: int) -> int:
 	if zen < base:
 		return 0
 	var n: int = int(floor(log(zen * (D.COST_GROWTH - 1.0) / base + 1.0) / log(D.COST_GROWTH)))
+	n = mini(n, helper_room(i))
 	while n > 0 and helper_cost(i, n) > zen:
 		n -= 1
 	return n
 
 
+## Сколько друзей одного вида помещается в источник сейчас (растёт с главами).
+func helper_cap() -> int:
+	return D.friend_cap(chapter)
+
+
+## Сколько ещё можно позвать этого друга (0 — мест нет).
+func helper_room(i: int) -> int:
+	return maxi(0, helper_cap() - int(owned[i]))
+
+
 func buy_helper(i: int, n: int) -> bool:
-	if n <= 0 or not helper_revealed(i):
+	if n <= 0 or not helper_revealed(i) or n > helper_room(i):
 		return false
 	var cost: float = helper_cost(i, n)
 	if zen < cost:
@@ -357,9 +373,9 @@ func nap_unlocked() -> bool:
 
 
 func nap_gain() -> int:
-	# Кубический корень: после ускорения экономики (x2 друзья, общие улучшения)
-	# квадратный разгонял игру слишком сильно. Пороги глав подобраны симуляцией.
-	var potential: int = int(floor(pow(all_total / 1.0e7, 1.0 / 3.0)))
+	# Корень 4-й степени (v1.2): мандарины копятся медленнее, чем раньше с кубическим.
+	# Пороги глав 9–24 подобраны симуляцией под эту формулу (tools/sched.gd).
+	var potential: int = int(floor(pow(all_total / D.NAP_DIVISOR, 1.0 / D.NAP_ROOT)))
 	return maxi(0, potential - mandarins)
 
 

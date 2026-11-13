@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300">
+  <!-- Снежные шапки для mountains.svg (тот же viewBox) -->
+  <g fill="#ffffff">
+    <path d="M210 60 L240 96 L226 92 L212 104 L198 90 L182 98 Z"/>
+    <path d="M440 30 L474 74 L458 70 L444 84 L428 68 L408 78 Z"/>
+    <path d="M580 90 L604 112 L590 110 L580 120 L570 108 L556 112 Z"/>
+    <path d="M70 120 L92 136 L78 136 L68 144 L58 134 L48 138 Z"/>
+  </g>
+</svg>

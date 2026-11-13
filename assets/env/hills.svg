@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260">
+  <!-- Ближние холмы в оттенках серого (цвет через modulate) -->
+  <path d="M0 260 L0 90 C90 40 190 50 290 90 C380 125 450 60 560 55 C640 52 690 70 720 85 L720 260 Z" fill="#f0f0f0"/>
+  <path d="M0 260 L0 150 C120 110 230 120 330 150 C430 180 540 120 720 140 L720 260 Z" fill="#ffffff"/>
+  <path d="M0 160 C120 120 230 130 330 160 C430 190 540 130 720 150" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.8"/>
+  <g fill="#e2e2e2" opacity="0.8">
+    <ellipse cx="120" cy="200" rx="40" ry="8"/><ellipse cx="560" cy="190" rx="50" ry="9"/><ellipse cx="380" cy="220" rx="30" ry="6"/>
+  </g>
+</svg>
