@@ -58,8 +58,8 @@ docs/        # screenshots and design notes (in Russian)
 
 ## Credits and licenses
 
-- **Code, story, capybara art, sounds and music:** made for this project.
-- **Animal sprites:** [Kenney](https://kenney.nl/assets), Animal Pack Remastered, CC0. See `assets/friends/KENNEY_LICENSE.txt`.
+- **Code, story, scenery, sounds and music:** made for this project.
+- **Capybara and animal sprites:** generated for this project with Google Gemini (Nano Banana) in one shared style, then cut out and cleaned with a Godot script.
 - **Font:** [Nunito](https://fonts.google.com/specimen/Nunito), SIL Open Font License 1.1. See `assets/fonts/NUNITO_OFL.txt`.
 
 © 2026 poetiha. The code is published for viewing; all rights reserved.

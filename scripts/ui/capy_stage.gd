@@ -217,7 +217,8 @@ func _layout_chill(w: float, h: float) -> void:
 	var base_y: float = capy_holder.position.y + h * (312.0 / 360.0)   # линия воды у Капи
 	pool_rect.position = Vector2(-4.0, base_y - h * 0.98)
 	pool_rect.size = Vector2(size.x + 8.0, h * 1.27)
-	var fs: float = w * 0.19
+	# Новые спрайты (голова + плечи + лапки) крупнее старых круглых голов
+	var fs: float = w * 0.23
 	for i in chill_sprites:
 		var slot: Array = CHILL_SLOTS[int(i) % CHILL_SLOTS.size()]
 		var unit: Control = chill_sprites[i]
