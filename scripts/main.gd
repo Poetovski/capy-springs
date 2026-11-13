@@ -12,6 +12,8 @@ const Backdrop = preload("res://scripts/ui/backdrop.gd")
 const CapyStage = preload("res://scripts/ui/capy_stage.gd")
 const Popups = preload("res://scripts/ui/popups.gd")
 const Audio = preload("res://scripts/ui/audio.gd")
+const Online = preload("res://scripts/net/talo_client.gd")
+const LeaderboardPopup = preload("res://scripts/ui/leaderboard_popup.gd")
 const TABS: Array = [
 	["tab_friends", preload("res://scripts/ui/tabs/friends_tab.gd")],
 	["tab_upgrades", preload("res://scripts/ui/tabs/upgrades_tab.gd")],
@@ -33,6 +35,9 @@ var backdrop: Control
 var stage: Control
 var popups: Control
 var audio: Node
+var online: Node                 # онлайн-топ (Talo)
+var leaderboard: RefCounted
+var top_btn: TextureButton
 var margin: MarginContainer
 var top_panel: PanelContainer
 var place_label: Label
@@ -65,6 +70,8 @@ func _ready() -> void:
 	Engine.max_fps = FPS_ACTIVE
 	audio = Audio.new()
 	add_child(audio)
+	online = Online.new()
+	add_child(online)
 	_build_ui()
 	Game.chapter_unlocked.connect(_on_chapter_unlocked)
 	Game.friend_joined.connect(_on_friend_joined)
@@ -161,6 +168,17 @@ func _build_ui() -> void:
 	popups.lang_toggled.connect(_on_lang_toggled)
 	popups.reset_confirmed.connect(_on_reset)
 	gear_btn.pressed.connect(popups.show_settings)
+	# Кнопка онлайн-топа в левом верхнем углу верхней панели
+	leaderboard = LeaderboardPopup.new(popups, online)
+	top_btn = TextureButton.new()
+	top_btn.texture_normal = K.tex("trophy")
+	top_btn.ignore_texture_size = true
+	top_btn.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	top_btn.size = Vector2(52, 52)
+	top_btn.modulate = Color(1, 1, 1, 0.9)
+	top_btn.pressed.connect(_on_top_pressed)
+	add_child(top_btn)
+	move_child(popups, -1)
 	update_tab_titles()
 
 
@@ -217,6 +235,7 @@ func _layout() -> void:
 	backdrop.set_stage(stage.get_global_rect())
 	var tr: Rect2 = top_panel.get_global_rect()
 	gear_btn.position = Vector2(tr.end.x - gear_btn.size.x - 8.0, tr.position.y + 8.0)
+	top_btn.position = Vector2(tr.position.x + 8.0, tr.position.y + 8.0)
 	toast_label.size = Vector2(size.x - 60, 80)
 	# Тост — посередине сцены, ниже облачка с мыслями Капи
 	var sr: Rect2 = stage.get_global_rect()
@@ -437,6 +456,11 @@ func _on_achievement_ready(id: String) -> void:
 	update_tab_titles()
 	if current_tab == TAB_AWARDS:
 		rebuild_tab(true)
+
+
+func _on_top_pressed() -> void:
+	if not popups.is_open():
+		leaderboard.show_top()
 
 
 func _on_lang_toggled() -> void:

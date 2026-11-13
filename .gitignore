@@ -18,3 +18,6 @@ exports/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Ключ онлайн-топа (Talo): попадает в сборку, но не в git
+secrets/

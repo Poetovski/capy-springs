@@ -78,8 +78,17 @@ func close() -> void:
 		show_message(q[0], q[1], q[2])
 
 
+## Пустая панель для своих окон (топ игроков). replace = true — заменить
+## текущее окно без анимации появления и без перехода к очереди.
+func open_panel(replace: bool = false) -> VBoxContainer:
+	if replace and layer:
+		layer.queue_free()
+		layer = null
+	return _open(not replace)
+
+
 ## Затемнение + панель по центру с появлением; возвращает контейнер для содержимого.
-func _open() -> VBoxContainer:
+func _open(animate: bool = true) -> VBoxContainer:
 	var dim: ColorRect = ColorRect.new()
 	dim.color = K.C_DIM
 	dim.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -94,12 +103,14 @@ func _open() -> VBoxContainer:
 	cc.add_child(p)
 	var vb: VBoxContainer = K.vbox(14)
 	p.add_child(vb)
+	p.resized.connect(func(): p.pivot_offset = p.size * 0.5)
+	if not animate:
+		return vb
 	p.scale = Vector2(0.85, 0.85)
 	p.modulate.a = 0.0
 	var tw: Tween = create_tween().set_parallel(true)
 	tw.tween_property(p, "modulate:a", 1.0, 0.2)
 	tw.tween_property(p, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	p.resized.connect(func(): p.pivot_offset = p.size * 0.5)
 	return vb
 
 
