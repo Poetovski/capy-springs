@@ -141,6 +141,7 @@ func show_register(replace: bool = true) -> void:
 	_field(vb, "nick", Game.txt("top_nick"))
 	_field(vb, "email", Game.txt("top_email"))
 	_field(vb, "pass", Game.txt("top_password"), true)
+	vb.add_child(K.label(Game.txt("top_pass_hint"), 15, K.C_BROWN_SOFT, true, true))
 	_finish_form(vb, Game.txt("top_register"), _on_register)
 
 
@@ -155,9 +156,14 @@ func _val(key: String) -> String:
 	return (_fields[key] as LineEdit).text.strip_edges() if _fields.has(key) else ""
 
 
+## Ник: 3–20 символов, только буквы, цифры, _ - . (без @: никто случайно не
+## покажет в топе свою почту). Пароль: 8–128 символов и не совпадает с ником.
 static func valid_form(nick: String, password: String, email: String = "x@y.z") -> bool:
-	return nick.length() >= 3 and nick.length() <= 24 and password.length() >= 8 \
-		and email.contains("@") and email.contains(".")
+	var re: RegEx = RegEx.create_from_string("^[A-Za-zА-Яа-яЁё0-9_.\\-]{3,20}$")
+	var at: int = email.find("@")
+	return re.search(nick) != null and password.length() >= 8 and password.length() <= 128 \
+		and password.to_lower() != nick.to_lower() \
+		and at > 0 and email.find(".", at) > at + 1 and not email.contains(" ")
 
 
 func _show_error(code: String) -> void:
@@ -165,6 +171,8 @@ func _show_error(code: String) -> void:
 		return
 	var key: String = "err_" + code
 	_msg.text = Game.txt(key) if D.STRINGS.has(key) else Game.txt("err_other")
+	if code == "too_many":
+		_msg.text = Game.txt("err_too_many") % online.lock_left()
 
 
 func _after_auth(result: String) -> void:
