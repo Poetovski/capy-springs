@@ -1,19 +1,19 @@
 # Capy Springs 🛁
 
 A cozy idle clicker with a story, made in **Godot 4** with **GDScript**.
-Capy the capybara sits in a frozen hot spring and warms the valley back to life with zen. Friends come back, the snow melts, and the story unfolds over three books and 24 chapters.
+Capy the capybara sits in a frozen hot spring and warms the valley back to life with zen. Friends come back, the snow melts, and the story unfolds over four books and 32 chapters, each with its own painted scenery.
 
 **▶ Play in the browser:** https://poetiha.itch.io/capy-springs · **What's new:** [CHANGELOG](CHANGELOG.md)
 
-| Start | Night by the spring | Book Three | Upgrades | Achievements |
+| Start | Night by the spring | Book Four | Upgrades | Achievements |
 |---|---|---|---|---|
-| ![Start](docs/screenshots/start.png) | ![Main](docs/screenshots/main.png) | ![Book Three](docs/screenshots/summer.png) | ![Upgrades](docs/screenshots/upgrades.png) | ![Awards](docs/screenshots/awards.png) |
+| ![Start](docs/screenshots/start.png) | ![Main](docs/screenshots/main.png) | ![Book Four](docs/screenshots/island.png) | ![Upgrades](docs/screenshots/upgrades.png) | ![Awards](docs/screenshots/awards.png) |
 
 ## Features
 
-- **Tap and idle economy:** 24 friends give passive income. Prices grow by ×1.15 per purchase, with buy ×1 / ×10 / MAX. Each kind of friend has a limited number of places in the spring, and the limit grows with every chapter.
+- **Tap and idle economy:** 32 friends give passive income. Prices grow by ×1.15 per purchase, with buy ×1 / ×10 / MAX. Each kind of friend has a limited number of places in the spring, and the limit grows with every chapter.
 - **Upgrades:** tiered upgrades for every friend, global "all friends" boosts and tap upgrades.
-- **Story:** three books with 24 chapters. Every friend has their own lines, and Capy has 100+ thoughts that react to the chapter and to the friends nearby.
+- **Story:** four books with 32 chapters and a painted illustration for every place. Every friend has their own lines, and Capy has 100+ thoughts that react to the chapter and to the friends nearby.
 - **A place for every chapter:** the scenery is built in code from layered SVG parts (sky, mountains, hills, trees, lanterns, sun and moon) with its own weather: snow, petals, falling leaves, fireflies.
 - **Prestige ("Great Nap"):** reset for golden mandarins that give a permanent bonus.
 - **38 achievements** that each give a permanent +2% bonus.
@@ -60,6 +60,7 @@ docs/        # screenshots and design notes (in Russian)
 
 - **Code, story, scenery, sounds and music:** made for this project.
 - **Capybara and animal sprites:** generated for this project with Google Gemini (Nano Banana) in one shared style, then cut out and cleaned with a Godot script.
+- **Chapter scenery:** 32 backgrounds generated with Google Gemini (Nano Banana) in the same style, cropped and compressed with a Godot script.
 - **Font:** [Nunito](https://fonts.google.com/specimen/Nunito), SIL Open Font License 1.1. See `assets/fonts/NUNITO_OFL.txt`.
 
 © 2026 poetiha. The code is published for viewing; all rights reserved.

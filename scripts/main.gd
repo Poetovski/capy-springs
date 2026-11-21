@@ -184,7 +184,7 @@ func _build_ui() -> void:
 
 func _build_top_panel() -> PanelContainer:
 	top_panel = PanelContainer.new()
-	top_panel.add_theme_stylebox_override("panel", K.sb(K.C_PANEL, 22, 12))
+	top_panel.add_theme_stylebox_override("panel", K.sb(Color(K.C_PANEL, 0.86), 22, 12))
 	var tv: VBoxContainer = K.vbox(0)
 	top_panel.add_child(tv)
 	place_label = K.label("", 20, K.C_BROWN_SOFT, true)
@@ -428,6 +428,7 @@ func _on_offline_earned(_amount: float) -> void:
 
 func _on_chapter_unlocked(index: int) -> void:
 	_apply_chapter(true)
+	stage.celebrate(true)
 	_show_chapter_popup(index)
 	if current_tab == TAB_STORY:
 		rebuild_tab(true)
@@ -440,10 +441,11 @@ func _apply_chapter(animated: bool) -> void:
 
 func _show_chapter_popup(index: int) -> void:
 	var ch: Dictionary = D.CHAPTERS[index]
-	popups.show_message((Game.txt("chapter") % (index + 1)) + "\n" + str(ch["place_" + Game.lang]), str(ch["text_" + Game.lang]), stage.tex_capy)
+	popups.show_message((Game.txt("chapter") % (index + 1)) + "\n" + str(ch["place_" + Game.lang]), str(ch["text_" + Game.lang]), stage.tex_capy, Backdrop.painting(index))
 
 
 func _on_friend_joined(i: int) -> void:
+	stage.celebrate()
 	var h: Dictionary = D.HELPERS[i]
 	popups.show_message(Game.txt("friend_joined") % h[Game.lang], "«" + str(h["line_" + Game.lang]) + "»", stage.friend_tex[h["icon"]])
 

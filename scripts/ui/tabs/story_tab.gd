@@ -1,8 +1,10 @@
 extends "res://scripts/ui/tabs/tab_base.gd"
 ## Вкладка «История»: прочитанные главы (новые сверху) и реплики друзей.
 
+const Backdrop = preload("res://scripts/ui/backdrop.gd")
+
 ## Первая глава каждой книги и ключ её заголовка.
-const BOOKS: Array = [[0, "book1_title"], [D.BOOK2_FIRST_CHAPTER, "book2_title"], [D.BOOK3_FIRST_CHAPTER, "book3_title"]]
+const BOOKS: Array = [[0, "book1_title"], [D.BOOK2_FIRST_CHAPTER, "book2_title"], [D.BOOK3_FIRST_CHAPTER, "book3_title"], [D.BOOK4_FIRST_CHAPTER, "book4_title"]]
 
 
 func build() -> void:
@@ -20,6 +22,11 @@ func build() -> void:
 		var row: PanelContainer = K.row_panel()
 		var vb: VBoxContainer = K.vbox()
 		row.add_child(vb)
+		var art: Texture2D = Backdrop.painting(c)
+		if art != null:
+			var bn: Control = K.banner(art, 0.0, 200.0, 14)
+			bn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			vb.add_child(bn)
 		vb.add_child(K.label((Game.txt("chapter") % (c + 1)) + " · " + str(ch["place_" + lang]), 22, K.C_BROWN, false, true))
 		vb.add_child(K.label(str(ch["text_" + lang]), 18, K.C_BROWN_SOFT, false, true))
 		box.add_child(row)

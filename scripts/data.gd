@@ -92,6 +92,39 @@ const HELPERS: Array = [
 		"ru": "Лиса", "en": "Fox",
 		"line_ru": "Осень стесняется, поэтому пришла я. Он скоро тоже подойдёт.",
 		"line_en": "Autumn is shy, so I came first. He'll join us soon."},
+	# --- Книга четвёртая «Остров за морем» ---
+	{"icon": "crab", "cost": 1.5e28, "zps": 5.9e17, "chapter_req": 24,
+		"ru": "Краб", "en": "Crab",
+		"line_ru": "Я хожу боком, но к тебе шёл прямо. Ну, почти прямо.",
+		"line_en": "I walk sideways, but I came straight to you. Well, almost straight."},
+	{"icon": "seal", "cost": 2.1e29, "zps": 3.5e18, "chapter_req": 25,
+		"ru": "Тюлень", "en": "Seal",
+		"line_ru": "Плот с горячей ванной? Я всю жизнь об этом мечтал. Подвиньтесь.",
+		"line_en": "A raft with a hot tub? I've dreamed of this my whole life. Scoot over."},
+	{"icon": "octopus", "cost": 3.0e30, "zps": 2.05e19, "chapter_req": 26,
+		"ru": "Осьминог", "en": "Octopus",
+		"line_ru": "Я был серый от холода. А рядом с вами стал розовый!",
+		"line_en": "I was grey from the cold. Next to you, I turned pink!"},
+	{"icon": "flamingo", "cost": 4.2e31, "zps": 1.2e20, "chapter_req": 27,
+		"ru": "Фламинго", "en": "Flamingo",
+		"line_ru": "Научите меня сидеть спокойно? Я пробовала, но ноги сами танцуют.",
+		"line_en": "Can you teach me to sit still? I tried, but my legs keep dancing."},
+	{"icon": "lemur", "cost": 5.9e32, "zps": 7.1e20, "chapter_req": 28,
+		"ru": "Лемур", "en": "Lemur",
+		"line_ru": "Тихий час? Это как вечеринка, только все лежат? Я в деле.",
+		"line_en": "Quiet hour? Like a party where everyone lies down? I'm in."},
+	{"icon": "quokka", "cost": 8.3e33, "zps": 4.2e21, "chapter_req": 29,
+		"ru": "Квокка", "en": "Quokka",
+		"line_ru": "Я всегда улыбаюсь. Но с вами — по-настоящему.",
+		"line_en": "I always smile. But with you, it's for real."},
+	{"icon": "axolotl", "cost": 1.17e35, "zps": 2.5e22, "chapter_req": 30,
+		"ru": "Аксолотль", "en": "Axolotl",
+		"line_ru": "Я хранитель огня. Но огонь, оказывается, тоже нужно кому-то хранить.",
+		"line_en": "I'm the keeper of the fire. Turns out the fire needed someone to keep it company."},
+	{"icon": "whale", "cost": 1.65e36, "zps": 1.47e23, "chapter_req": 31,
+		"ru": "Китёнок", "en": "Baby Whale",
+		"line_ru": "Я не влезаю в источник. Можно я просто полежу рядом и подышу паром?",
+		"line_en": "I don't fit in the spring. Can I just float nearby and breathe the steam?"},
 ]
 
 ## Сюжетные тексты лежат в data/story.gd; здесь — короткие имена, чтобы код писал D.CHAPTERS.
@@ -107,6 +140,7 @@ const EVENTS: Array = Story.EVENTS
 ## Индексы первых глав второй и третьей книги (разделители во вкладке «История»).
 const BOOK2_FIRST_CHAPTER: int = 8
 const BOOK3_FIRST_CHAPTER: int = 16
+const BOOK4_FIRST_CHAPTER: int = 24
 
 ## Лимит друзей одного вида: источник не резиновый. С каждой главой места
 ## становится больше, так что сначала нельзя бесконечно копить цыплят,
@@ -154,6 +188,13 @@ const ALL_UPGRADES: Array = [
 	[1.0e30, "Светлячковые фонари", "Firefly Lanterns"],
 	[1.0e31, "Кленовые пледы", "Maple Blankets"],
 	[1.0e32, "Колесо времён года", "Wheel of Seasons"],
+	[1.0e33, "Морской бриз", "Sea Breeze"],
+	[1.0e34, "Ракушечные бусы", "Seashell Beads"],
+	[1.0e35, "Тропический чай", "Tropical Tea"],
+	[1.0e36, "Тёплое течение", "Warm Current"],
+	[1.0e37, "Огонь Вулкана", "Volcano Glow"],
+	[1.0e38, "Маячный огонёк", "Beacon Light"],
+	[1.0e39, "Дружба через море", "Friendship Across the Sea"],
 ]
 
 ## Каждое полученное достижение навсегда даёт +2% ко всему дзену.
@@ -199,6 +240,16 @@ const ACHIEVEMENTS: Array = [
 	{"id": "nap_1", "stat": "naps", "goal": 1, "ru": "Сладкий сон", "en": "Sweet Dreams", "d_ru": "Впервые уснуть Великим Сном", "d_en": "Take your first Great Nap"},
 	{"id": "nap_5", "stat": "naps", "goal": 5, "ru": "Соня", "en": "Sleepyhead", "d_ru": "Уснуть Великим Сном 5 раз", "d_en": "Take 5 Great Naps"},
 	{"id": "nap_20", "stat": "naps", "goal": 20, "ru": "Мастер сновидений", "en": "Dream Master", "d_ru": "Уснуть Великим Сном 20 раз", "d_en": "Take 20 Great Naps"},
+	# --- Книга четвёртая ---
+	{"id": "ch_28", "stat": "chapter", "goal": 28, "ru": "Земля на горизонте", "en": "Land Ho", "d_ru": "Дойти до главы 28", "d_en": "Reach chapter 28"},
+	{"id": "ch_32", "stat": "chapter", "goal": 32, "ru": "Свет маяка", "en": "Lighthouse Beam", "d_ru": "Дойти до главы 32", "d_en": "Reach chapter 32"},
+	{"id": "kind_32", "stat": "kinds", "goal": 32, "ru": "Весь мир в гостях", "en": "The Whole World Came", "d_ru": "Познакомиться со всеми 32 зверями", "d_en": "Meet all 32 animals"},
+	{"id": "zen_1e35", "stat": "total", "goal": 1.0e35, "ru": "Морские глубины", "en": "Ocean Deep", "d_ru": "Накопить всего 100Dc дзена", "d_en": "Gather 100Dc zen in total"},
+	{"id": "zen_1e40", "stat": "total", "goal": 1.0e40, "ru": "Сердце острова", "en": "Heart of the Island", "d_ru": "Накопить всего 10Dd дзена", "d_en": "Gather 10Dd zen in total"},
+	{"id": "tap_250k", "stat": "taps", "goal": 250000, "ru": "Лапка-маяк", "en": "Lighthouse Paw", "d_ru": "Нажать на Капи 250 000 раз", "d_en": "Tap Capy 250,000 times"},
+	{"id": "gold_500", "stat": "golden", "goal": 500, "ru": "Мандариновый остров", "en": "Mandarin Island", "d_ru": "Поймать 500 золотых мандаринов", "d_en": "Catch 500 golden mandarins"},
+	{"id": "nap_100", "stat": "naps", "goal": 100, "ru": "Сто снов", "en": "A Hundred Dreams", "d_ru": "Уснуть Великим Сном 100 раз", "d_en": "Take 100 Great Naps"},
+	{"id": "fr_5000", "stat": "friends", "goal": 5000, "ru": "Целый остров", "en": "A Whole Island", "d_ru": "Позвать 5 000 друзей", "d_en": "Invite 5,000 friends"},
 ]
 
 const STRINGS: Dictionary = {
@@ -256,9 +307,11 @@ const STRINGS: Dictionary = {
 	"close": {"ru": "Закрыть", "en": "Close"},
 	"chapter_progress": {"ru": "До главы %d: %d%%", "en": "To chapter %d: %d%%"},
 	# --- Книга вторая ---
-	"story_end": {"ru": "Все три книги прочитаны! Четвёртая уже пишется, а дзен можно копить бесконечно.", "en": "You've read all three books! Book four is on its way, and zen is endless."},
+	"story_end": {"ru": "Все четыре книги прочитаны! Пятая уже пишется, а дзен можно копить бесконечно.", "en": "You've read all four books! Book five is on its way, and zen is endless."},
 	"book3_title": {"ru": "Книга третья · Лето и Осень", "en": "Book Three · Summer and Autumn"},
 	"locked_hint_book3": {"ru": "Кто-то прячется от солнца в тени...", "en": "Someone is hiding from the sun in the shade..."},
+	"book4_title": {"ru": "Книга четвёртая · Остров за морем", "en": "Book Four · The Island Beyond the Sea"},
+	"locked_hint_book4": {"ru": "Кто-то машет тебе с гребня волны...", "en": "Someone is waving at you from the crest of a wave..."},
 	"owned_cap": {"ru": "x%d из %d · %s/с", "en": "x%d of %d · %s/s"},
 	"cap_full": {"ru": "Мест нет", "en": "No room"},
 	"cap_hint": {"ru": "В источнике больше нет места. В следующей главе станет просторнее.", "en": "No more room in the spring. It gets roomier in the next chapter."},
@@ -332,7 +385,8 @@ static func build_upgrades() -> Array:
 	list.append({"id": "tap_5", "type": "tap", "cost": 10000000000.0, "mult": 2.0, "ru": "Лапка-облачко", "en": "Cloud Paw", "icon": "paw"})
 	var tz: Array = [[50000.0, 0.01, "Дзен-касание", "Zen Touch"], [5000000.0, 0.02, "Глубокое касание", "Deep Touch"],
 		[500000000.0, 0.04, "Касание мудреца", "Sage Touch"], [50000000000.0, 0.08, "Касание вечности", "Eternal Touch"],
-		[5.0e14, 0.1, "Касание весны", "Spring Touch"], [5.0e18, 0.15, "Касание звёзд", "Starlight Touch"]]
+		[5.0e14, 0.1, "Касание весны", "Spring Touch"], [5.0e18, 0.15, "Касание звёзд", "Starlight Touch"],
+		[5.0e27, 0.1, "Касание моря", "Sea Touch"], [5.0e34, 0.1, "Касание вулкана", "Volcano Touch"]]
 	for k in tz.size():
 		list.append({"id": "tz_%d" % k, "type": "tapzps", "cost": tz[k][0], "value": tz[k][1], "ru": tz[k][2], "en": tz[k][3], "icon": "paw"})
 	# Мандарины

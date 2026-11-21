@@ -26,6 +26,9 @@ const CHILL_SLOTS: Array = [
 	# Книга третья
 	[-0.21, 0.17, false], [0.21, 0.17, false], [-0.62, 0.17, false], [0.62, 0.17, false],
 	[-0.44, -0.66, true], [0.44, -0.66, true],
+	# Книга четвёртая
+	[-0.40, -0.18, true], [0.40, -0.18, true], [0.0, 0.24, false], [-0.62, -0.40, false],
+	[0.62, -0.40, false], [-0.30, -0.64, true], [0.30, -0.64, true], [-0.82, -0.26, false],
 ]
 
 var tex_capy: Texture2D
@@ -395,3 +398,38 @@ func _on_golden() -> void:
 	golden_btn.visible = false
 	golden_timer = Game.golden_interval()
 	golden_pressed.emit()
+
+
+# ---------- праздник ----------
+
+## Разовый всплеск лепестков и искорок над Капи: новая глава, новый друг.
+func celebrate(big: bool = false) -> void:
+	var p: CPUParticles2D = CPUParticles2D.new()
+	p.texture = K.tex("env/petal")
+	p.one_shot = true
+	p.explosiveness = 0.9
+	p.amount = 70 if big else 36
+	p.lifetime = 2.6
+	p.position = capy_holder.position + Vector2(capy_holder.size.x * 0.5, capy_holder.size.y * 0.3)
+	p.direction = Vector2(0, -1)
+	p.spread = 70.0
+	p.initial_velocity_min = 260.0
+	p.initial_velocity_max = 520.0
+	p.gravity = Vector2(0, 520)
+	p.angular_velocity_min = -240.0
+	p.angular_velocity_max = 240.0
+	p.angle_max = 360.0
+	p.scale_amount_min = 0.5
+	p.scale_amount_max = 1.0
+	var g: Gradient = Gradient.new()
+	g.set_color(0, Color("ffb3c9"))
+	g.set_color(1, Color("ffd36b"))
+	g.add_point(0.5, Color("9fd7ff"))
+	p.color_initial_ramp = g
+	var fade: Gradient = Gradient.new()
+	fade.set_color(0, Color(1, 1, 1, 1))
+	fade.set_color(1, Color(1, 1, 1, 0))
+	p.color_ramp = fade
+	add_child(p)
+	p.emitting = true
+	p.finished.connect(p.queue_free)

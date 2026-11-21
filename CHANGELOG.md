@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.3 — "The Island Beyond the Sea"
+
+### Story
+- **Book Four, "The Island Beyond the Sea":** 8 new chapters, 32 in total.
+- The spring starts to cool down. A message in a bottle leads Capy and friends on a bamboo raft across the sea to the Old Volcano that warms every spring in the world.
+- **8 new friends:** crab, seal, octopus, flamingo, lemur, quokka, axolotl and a baby whale. Each has a greeting, three friendship lines and a thought of Capy's about them.
+- New Capy thoughts for every Book Four chapter.
+
+### New look
+- **Painted scenery for all 32 chapters.** Every place now has its own hand-made illustration in the game's flat cartoon style. The scene slowly "breathes" with a gentle zoom.
+- The chapter window shows a picture of the new place above the text. Long chapter texts scroll inside the window.
+- The Story tab shows the picture of every chapter you have read.
+- A burst of petals over Capy when a new chapter opens or a new friend arrives.
+- The top panel is slightly see-through, so more of the scenery shows.
+
+### Longer game
+- Book Four adds about 95 hours of active play (about 5 months for players who drop in a few times a day). The whole story now takes about 180 active hours.
+- 7 new "all friends" upgrades, 2 new tap upgrades and 9 new achievements.
+- 8 more seats in the pool, so all 32 friends fit around Capy.
+
+### Under the hood
+- New tests for Book Four (data, progression, pool seats, pictures, Story tab). All 7 test suites pass.
+- Chapter pictures are stored as compressed JPG (about 2 MB for all 32), so the web build stays small.
+
 ## 1.2 — "Summer and Autumn"
 
 ### New look

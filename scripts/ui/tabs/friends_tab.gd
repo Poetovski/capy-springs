@@ -63,7 +63,8 @@ func refresh() -> void:
 			ic.modulate = Color(0, 0, 0, 0.55)
 			nl.text = Game.txt("locked")
 			var req: int = int(h.get("chapter_req", 0))
-			il.text = Game.txt("locked_hint_book3" if req >= D.BOOK3_FIRST_CHAPTER else ("locked_hint_book2" if h.has("chapter_req") else "locked_hint"))
+			var hint: String = "locked_hint_book4" if req >= D.BOOK4_FIRST_CHAPTER else ("locked_hint_book3" if req >= D.BOOK3_FIRST_CHAPTER else ("locked_hint_book2" if h.has("chapter_req") else "locked_hint"))
+			il.text = Game.txt(hint)
 			btn.text = D.fmt(Game.helper_cost(i, 1))
 			btn.disabled = true
 			continue

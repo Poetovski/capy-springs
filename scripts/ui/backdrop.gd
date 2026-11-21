@@ -61,6 +61,23 @@ const PLACES: Array = [
 		"props": [["tree_mandarin", 0.07, 0.56, false], ["lantern", 0.2, 0.34, false], ["tree_mandarin", 0.94, 0.54, true], ["lantern", 0.81, 0.34, true]], "weather": "leaves"},
 	{"sky": ["#5a4f9a", "#f0b9a8"], "mtn": "#7d6aa6", "snow": true, "hill": "#9cba8c", "orb": "moon", "stars": true, "clouds": 2,
 		"props": [["tree_sakura", 0.06, 0.54, false], ["sunflower", 0.18, 0.34, false], ["tree_maple", 0.94, 0.54, true], ["pine_snow", 0.82, 0.4, true]], "weather": "mix"},
+	# --- Книга 4: Остров за морем (запасной вид, если нет нарисованного фона assets/bg) ---
+	{"sky": ["#8fd3f0", "#eaf8fb"], "mtn": "#9cc6d2", "snow": false, "hill": "#f1e2b8", "orb": "sun", "stars": false, "clouds": 3,
+		"props": [["rocks", 0.12, 0.16, false], ["reeds", 0.2, 0.22, false], ["rocks", 0.86, 0.14, true]], "weather": ""},
+	{"sky": ["#18234f", "#3d5590"], "mtn": "#2b3c72", "snow": false, "hill": "#2f4a80", "orb": "moon", "stars": true, "clouds": 0,
+		"props": [["lantern", 0.18, 0.32, false], ["lantern", 0.82, 0.32, true]], "weather": "sparkles"},
+	{"sky": ["#7fdcec", "#e6fbf7"], "mtn": "#8fd0cc", "snow": false, "hill": "#a9e4d8", "orb": "sun", "stars": false, "clouds": 2,
+		"props": [["rocks", 0.1, 0.16, false], ["flowers", 0.22, 0.14, false], ["rocks", 0.88, 0.16, true]], "weather": "sparkles"},
+	{"sky": ["#6fcbf2", "#f3f9ea"], "mtn": "#8ec7b5", "snow": false, "hill": "#f2e3b3", "orb": "sun_big", "stars": false, "clouds": 2,
+		"props": [["tree_summer", 0.07, 0.52, false], ["sunflower", 0.2, 0.3, false], ["tree_summer", 0.94, 0.5, true]], "weather": ""},
+	{"sky": ["#7cc7a0", "#e3f5dc"], "mtn": "#5f9f7d", "snow": false, "hill": "#7fc277", "orb": "", "stars": false, "clouds": 1,
+		"props": [["bamboo", 0.05, 0.7, false], ["tree_summer", 0.18, 0.5, true], ["bamboo", 0.95, 0.68, true], ["flowers", 0.82, 0.15, false]], "weather": "leaves_green"},
+	{"sky": ["#a7d6e8", "#f5efdc"], "mtn": "#9c8c84", "snow": false, "hill": "#a9cf7f", "orb": "sun", "stars": false, "clouds": 3,
+		"props": [["tree_summer", 0.06, 0.48, false], ["lantern", 0.2, 0.32, false], ["rocks", 0.84, 0.14, true]], "weather": ""},
+	{"sky": ["#4a2f55", "#e48a63"], "mtn": "#6b4552", "snow": false, "hill": "#7a5a58", "orb": "", "stars": true, "clouds": 1,
+		"props": [["rocks", 0.12, 0.18, false], ["rocks", 0.88, 0.18, true]], "weather": "fireflies"},
+	{"sky": ["#f3a27c", "#fde3c4"], "mtn": "#b98a8a", "snow": false, "hill": "#d8c69a", "orb": "sun_low", "stars": false, "clouds": 2,
+		"props": [["lantern", 0.18, 0.4, false], ["rocks", 0.08, 0.16, false], ["tree_mandarin", 0.94, 0.52, true]], "weather": "fireflies"},
 ]
 
 ## Деревья выше, чем в таблице: нижнюю часть всё равно закрывает бассейн.
@@ -94,7 +111,7 @@ func show_chapter(chapter: int, animated: bool) -> void:
 		return
 	place = p
 	var old: Control = layer
-	layer = _build(PLACES[p])
+	layer = _build(PLACES[p], p)
 	add_child(layer)
 	if old == null or not animated:
 		if old:
@@ -156,13 +173,21 @@ func _rect(tex: Texture2D, stretch: int = TextureRect.STRETCH_SCALE) -> TextureR
 	return t
 
 
-func _build(p: Dictionary) -> Control:
+func _build(p: Dictionary, index: int = -1) -> Control:
 	var root: Control = Control.new()
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.size = size
 	var W: float = maxf(size.x, 1.0)
 	var H: float = maxf(size.y, 1.0)
 	var sh: float = maxf(stage.size.y, 200.0)
+	# Нарисованный фон главы (assets/bg/chNN), если он есть; иначе собираем место из частей
+	var art: Texture2D = painting(index)
+	if art != null:
+		_build_painting(root, art, W, H)
+		var wp: String = p["weather"]
+		if wp != "":
+			root.add_child(_weather(wp, W, sh))
+		return root
 	var horizon: float = stage.position.y + sh * 0.32
 
 	# Небо: вертикальный градиент на весь экран
@@ -344,3 +369,43 @@ func _grad(offsets: Array, colors: Array) -> Gradient:
 	g.offsets = PackedFloat32Array(offsets)
 	g.colors = PackedColorArray(colors)
 	return g
+
+
+# ---------- нарисованные фоны ----------
+
+## Картинка главы: assets/bg/ch01 … ch32 (png/webp/jpg). null — если её нет.
+static func painting(index: int) -> Texture2D:
+	if index < 0:
+		return null
+	return K.tex("bg/ch%02d" % (index + 1))
+
+
+## Картинка заполняет экран по ширине от самого верха (как cover) и медленно «дышит»:
+## чуть приближается и отдаляется, чтобы фон был живым.
+func _build_painting(root: Control, art: Texture2D, W: float, H: float) -> void:
+	var bottom: float = maxf(stage.end.y + 40.0, H * 0.5)
+	var k: float = maxf(W / float(art.get_width()), bottom / float(art.get_height()))
+	var r: TextureRect = _rect(art)
+	r.size = Vector2(art.get_width(), art.get_height()) * k
+	# Середина картинки (горизонт, главный ориентир) — в полосе между верхней панелью и бассейном
+	var anchor: float = stage.position.y + stage.size.y * 0.12
+	var top: float = minf(0.0, anchor - r.size.y * 0.42)
+	if top + r.size.y < bottom:
+		top = bottom - r.size.y
+	r.position = Vector2((W - r.size.x) * 0.5, top)
+	r.pivot_offset = Vector2(r.size.x * 0.5, r.size.y * 0.3)
+	root.add_child(r)
+	var tw: Tween = r.create_tween().set_loops()
+	tw.tween_property(r, "scale", Vector2(1.035, 1.035), 14.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tw.tween_property(r, "scale", Vector2.ONE, 14.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	# Лёгкая дымка внизу: бассейн и список читаются лучше на любом фоне
+	var g: Gradient = _grad([0.0, 1.0], [Color(1, 1, 1, 0.0), Color(1, 0.98, 0.94, 0.35)])
+	var gt: GradientTexture2D = GradientTexture2D.new()
+	gt.gradient = g
+	gt.width = 4
+	gt.height = 64
+	gt.fill_to = Vector2(0, 1)
+	var haze: TextureRect = _rect(gt)
+	haze.position = Vector2(0, stage.position.y + stage.size.y * 0.4)
+	haze.size = Vector2(W, H - haze.position.y)
+	root.add_child(haze)

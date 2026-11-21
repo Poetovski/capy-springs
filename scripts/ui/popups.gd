@@ -23,17 +23,27 @@ func is_open() -> bool:
 
 
 ## Окно с картинкой, заголовком, текстом и кнопкой «Дальше».
-func show_message(title: String, body: String, icon: Texture2D) -> void:
+## banner — картинка места (нарисованный фон главы): показывается сверху вместо значка.
+func show_message(title: String, body: String, icon: Texture2D, banner: Texture2D = null) -> void:
 	if layer != null:
-		_queue.append([title, body, icon])
+		_queue.append([title, body, icon, banner])
 		return
 	var vb: VBoxContainer = _open()
-	if icon:
+	var w: float = minf(560.0, size.x - 110.0)
+	if banner:
+		vb.add_child(K.banner(banner, w, w * 0.46))
+	elif icon:
 		vb.add_child(K.icon(icon, 150))
 	vb.add_child(K.label(title, 30, K.C_BROWN, true))
 	var bl: Label = K.label(body, 21, K.C_BROWN_SOFT, true, true)
-	bl.custom_minimum_size = Vector2(minf(560.0, size.x - 110.0), 0)
-	vb.add_child(bl)
+	bl.custom_minimum_size = Vector2(w, 0)
+	# Длинный текст главы прокручивается, чтобы окно с картинкой не вылезало за экран
+	var sc: ScrollContainer = ScrollContainer.new()
+	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	sc.add_child(bl)
+	vb.add_child(sc)
+	var max_h: float = maxf(200.0, size.y - (560.0 if banner else 440.0))
+	sc.custom_minimum_size = Vector2(w, minf(_text_height(bl, w), max_h))
 	var b: Button = K.button(Game.txt("continue"), K.C_GREEN, 24, Vector2(0, 64), close)
 	b.mouse_filter = Control.MOUSE_FILTER_STOP
 	vb.add_child(b)
@@ -168,3 +178,15 @@ func _on_reset(b: Button) -> void:
 		return
 	close()
 	reset_confirmed.emit()
+
+
+## Высота текста с переносами при ширине w (для окна, пока оно ещё не разложено).
+func _text_height(l: Label, w: float) -> float:
+	var font: Font = l.get_theme_font("font")
+	var fs: int = l.get_theme_font_size("font_size")
+	var h: float = 0.0
+	for para in l.text.split("\n"):
+		var sz: Vector2 = font.get_multiline_string_size(para, HORIZONTAL_ALIGNMENT_LEFT, w, fs, -1, TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE)
+		h += maxf(sz.y, font.get_height(fs))
+	return h + 4.0
+

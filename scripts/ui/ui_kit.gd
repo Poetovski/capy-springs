@@ -127,3 +127,19 @@ static func tex(file: String) -> Texture2D:
 		if ResourceLoader.exists(path):
 			return load(path)
 	return null
+
+
+## Картинка (фон главы) в рамке со скруглёнными углами, заполняет w×h без искажений.
+static func banner(t: Texture2D, w: float, h: float, radius: int = 18) -> Control:
+	var frame: PanelContainer = PanelContainer.new()
+	frame.add_theme_stylebox_override("panel", sb(Color.WHITE, radius, 0))
+	frame.clip_children = CanvasItem.CLIP_CHILDREN_ONLY
+	frame.custom_minimum_size = Vector2(w, h)
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var r: TextureRect = TextureRect.new()
+	r.texture = t
+	r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	r.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	frame.add_child(r)
+	return frame

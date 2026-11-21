@@ -101,6 +101,39 @@ const CHAPTERS: Array = [
 		"place_ru": "Колесо времён года", "place_en": "The Wheel of Seasons",
 		"text_ru": "В тот вечер в источнике сидят все четверо: Зима, Весна, Лето и Осень. Впервые за сто лет вместе.\n\nЛето больше не боится уходить: она знает, что вернётся. Осень больше не прячется: его ждут. Весна держит брата за лапу, а Зима бережно дует на всех прохладным ветерком.\n\nКапи сидит посередине и молчит. Колесо поворачивается мягко, без скрипа: каждый знает свою очередь.\n\nКонец третьей книги. Говорят, далеко за морем есть остров, где никогда не было зимы... Но это уже совсем другая история.",
 		"text_en": "That evening, all four of them sit in the spring: Winter, Spring, Summer and Autumn. Together for the first time in a hundred years.\n\nSummer isn't afraid to leave anymore: she knows she'll come back. Autumn doesn't hide anymore: he's awaited. Spring holds her brother's paw, and Winter gently blows a cool breeze over everyone.\n\nCapy sits in the middle, quiet. The Wheel turns softly, without a creak: everyone knows whose turn it is.\n\nEnd of book three. They say that far across the sea there's an island that has never seen winter... But that's a whole other story."},
+	# --- Книга 4: Остров за морем ---
+	{"at": 4.0e33, "tint": Color(0.9, 0.97, 1.0),
+		"place_ru": "Морской берег", "place_en": "The Seashore",
+		"text_ru": "После праздника урожая все спали до обеда. А утром Капи заметила: вода в источнике стала чуть-чуть прохладнее. Совсем на капельку.\n\nСова листает старые записи: «Все тёплые источники на свете греет один огонь. Он живёт в Старом Вулкане, на острове за морем».\n\nНа берег выползает краб и тащит бутылку. В ней рисунок: грустная гора и слово «помогите». «Я хожу боком, — говорит краб, — но к тебе шёл прямо».\n\nДрузья строят плот из бамбука. Панда в этот раз съела только половину.",
+		"text_en": "After the harvest festival everyone slept until noon. And in the morning Capy noticed the water in the spring was a little cooler. Just a tiny bit.\n\nOwl flips through her old notes: \"Every warm spring in the world is heated by one fire. It lives in the Old Volcano, on the island beyond the sea.\"\n\nA crab crawls up the shore, dragging a bottle. Inside is a drawing: a sad mountain and the word \"help\". \"I walk sideways,\" says the crab, \"but I came straight to you.\"\n\nThe friends build a raft out of bamboo. This time Panda only ate half of it."},
+	{"at": 6.0e34, "tint": Color(0.78, 0.82, 1.0),
+		"place_ru": "Ночное море", "place_en": "The Night Sea",
+		"text_ru": "Плот плывёт по ночному морю. Лось притащил горячие камни, и посреди плота дымится деревянная бочка с тёплой водой. В ней, конечно, сидит Капи.\n\nНа плот забирается тюлень. «Я всю жизнь спал на льдинах, — вздыхает он. — Плот с горячей ванной — это роскошь. Можно я тут поживу?»\n\nКосатка толкает плот носом, Лунный кролик показывает дорогу по звёздам. Внизу, в чёрной воде, отражается всё небо. Кажется, будто плывёшь прямо по звёздам.",
+		"text_en": "The raft drifts across the night sea. Moose hauled hot stones aboard, and in the middle of the raft a wooden tub of warm water is steaming. Capy is sitting in it, of course.\n\nA seal climbs onto the raft. \"I've slept on ice floes all my life,\" he sighs. \"A raft with a hot tub is pure luxury. Mind if I live here?\"\n\nOrca nudges the raft with her nose, and Moon Rabbit finds the way by the stars. The black water below reflects the whole sky. It feels like sailing right across the stars."},
+	{"at": 4.0e35, "tint": Color(0.86, 1.0, 0.98),
+		"place_ru": "Коралловая лагуна", "place_en": "The Coral Lagoon",
+		"text_ru": "Утром плот заплывает в лагуну. Вода прозрачная, как стекло, но кораллы на дне бледные, почти серые. Им холодно.\n\nИз ракушки выглядывает маленький осьминог. Он меняет цвет от настроения, и сейчас он тоже серый. «На острове давно никто не ходит к Вулкану, — шепчет он. — Все забыли, откуда берётся тепло».\n\nКапи просто садится рядом в воду. Минута, другая... и осьминог розовеет. А за ним, один за другим, розовеют кораллы.",
+		"text_en": "In the morning the raft drifts into a lagoon. The water is clear as glass, but the corals below are pale, almost grey. They're cold.\n\nA little octopus peeks out of a shell. He changes color with his mood, and right now he's grey too. \"Nobody on the island visits the Volcano anymore,\" he whispers. \"Everyone forgot where the warmth comes from.\"\n\nCapy simply sits down in the water next to him. A minute, then another... and the octopus turns pink. Then, one by one, so do the corals."},
+	{"at": 4.0e36, "tint": Color(1.0, 0.97, 0.88),
+		"place_ru": "Пальмовый пляж", "place_en": "Palm Beach",
+		"text_ru": "Остров встречает белым песком и пальмами. Здесь никогда не было зимы, и местные ни разу в жизни не мёрзли. Им не нужно тепло. Поэтому о Вулкане они и не вспоминают.\n\nНа пляже стоит на одной ноге фламинго. Журавль тут же встаёт рядом, тоже на одну ногу. Кажется, это начало большой дружбы.\n\n«У нас все веселятся с утра до ночи, — рассказывает фламинго. — Никто никогда не сидит спокойно. Мы даже не знаем, как это».",
+		"text_en": "The island greets them with white sand and palm trees. Winter has never come here, and the locals have never been cold in their lives. They don't need warmth. That's why they never think about the Volcano.\n\nA flamingo stands on one leg on the beach. Crane immediately stands next to her, also on one leg. It looks like the start of a great friendship.\n\n\"Here everyone parties from morning till night,\" the flamingo says. \"Nobody ever sits still. We don't even know how.\""},
+	{"at": 5.0e37, "tint": Color(0.88, 1.0, 0.86),
+		"place_ru": "Шумные джунгли", "place_en": "The Noisy Jungle",
+		"text_ru": "В джунглях гремит музыка. Лемуры танцуют на лианах, попугаи поют, барабаны стучат без остановки. Праздник идёт уже сто лет.\n\nОдин лемур прыгает Капи прямо на голову, рядом с мандарином. «Ты кто? Почему не танцуешь?»\n\n«Я отдыхаю», — отвечает Капи и предлагает всем тихий час. Джунгли впервые затихают. И в тишине все слышат низкий грустный гул. Он идёт с горы.",
+		"text_en": "Music booms through the jungle. Lemurs dance on the vines, parrots sing, drums beat nonstop. The party has been going for a hundred years.\n\nA lemur jumps right onto Capy's head, next to the mandarin. \"Who are you? Why aren't you dancing?\"\n\n\"I'm resting,\" says Capy, and suggests a quiet hour for everyone. For the first time, the jungle goes silent. And in the silence everyone hears a low, sad rumble. It's coming from the mountain."},
+	{"at": 7.0e38, "tint": Color(1.0, 0.95, 0.86),
+		"place_ru": "Чайные террасы", "place_en": "The Tea Terraces",
+		"text_ru": "На склонах Вулкана ступеньками спускаются чайные террасы. Между ними прячутся старые горячие ванны. Когда-то тут отдыхал весь остров, а теперь вода в них еле тёплая.\n\nНа краю террасы сидит квокка и улыбается. «Я всегда улыбаюсь, чтобы никто не волновался, — признаётся она. — А на самом деле мне страшно. Вулкан остывает».\n\n«Бояться можно, — говорит Капи. — Только не одной. Пойдём бояться вместе». И все идут наверх.",
+		"text_en": "Tea terraces step down the slopes of the Volcano. Old hot baths hide between them. Once the whole island came here to rest, but now the water is barely warm.\n\nA quokka sits at the edge of a terrace, smiling. \"I always smile so nobody worries,\" she admits. \"But really I'm scared. The Volcano is getting cold.\"\n\n\"It's okay to be scared,\" says Capy. \"Just not alone. Let's be scared together.\" And everyone heads up the mountain."},
+	{"at": 1.0e40, "tint": Color(1.0, 0.86, 0.8),
+		"place_ru": "Сердце Вулкана", "place_en": "The Heart of the Volcano",
+		"text_ru": "В кратере лежит озеро, а в озере светится аксолотль, хранитель огня. Огонь под водой совсем маленький, как свечка.\n\nВулкан говорит тихим гулом: «Тысячу лет я грел все источники на свете. Один. Никто ни разу не пришёл сказать спасибо. Я устал. Я решил уснуть навсегда».\n\nКапи молча залезает в озеро и садится рядом с огоньком. За ней друзья из всех четырёх книг: цыплёнок, сова, Весна, Осень, даже Дух Зимы. Никто ничего не говорит. Просто сидят рядом.\n\nОгонёк вздрагивает. И разгорается.",
+		"text_en": "A lake lies in the crater, and in the lake glows an axolotl, the keeper of the fire. The fire under the water is tiny now, like a candle.\n\nThe Volcano speaks in a low rumble: \"For a thousand years I warmed every spring in the world. Alone. Nobody ever came to say thank you. I'm tired. I've decided to sleep forever.\"\n\nCapy quietly climbs into the lake and sits beside the little flame. The friends from all four books follow: Chick, Owl, Spring, Autumn, even the Winter Spirit. Nobody says a word. They just sit together.\n\nThe flame flickers. And grows bright."},
+	{"at": 1.5e41, "tint": Color(1.0, 0.93, 0.86),
+		"place_ru": "Маяк у источника", "place_en": "The Lighthouse by the Spring",
+		"text_ru": "Вулкан снова горит ровно и спокойно. Островитяне обещают приходить к нему каждую неделю с чаем и новостями. Квокка улыбается по-настоящему.\n\nДомой друзей везёт китёнок: плот привязан к его хвосту. Дома из плота строят маяк у самого источника.\n\nТеперь каждую ночь маяк мигает в сторону острова, а Вулкан мигает в ответ. Это значит: «Я здесь. Ты не один».\n\nВода в источнике снова горячая. Капи закрывает глаза.\n\nКонец четвёртой книги. А под самым дном источника кто-то тихо постучал... Но это будет потом.",
+		"text_en": "The Volcano burns calm and steady again. The islanders promise to visit every week with tea and news. Quokka's smile is real now.\n\nA baby whale tows the friends home, the raft tied to his tail. Back home, they turn the raft into a lighthouse right by the spring.\n\nNow every night the lighthouse blinks toward the island, and the Volcano blinks back. It means: \"I'm here. You're not alone.\"\n\nThe water in the spring is hot again. Capy closes both eyes.\n\nEnd of book four. And deep under the spring, someone knocked softly... But that comes later."},
 ]
 
 # ---------- Реплики дружбы ----------
@@ -228,6 +261,47 @@ const FRIEND_LINES: Dictionary = {
 		{"at": 10, "ru": "Я пришла с Осенью. Он стесняется, так что «привет» от него передаю я.", "en": "I came with Autumn. He's shy, so I'm the one saying hi for him."},
 		{"at": 25, "ru": "Я прячу мандарины в листьях. Потом забываю где. Потом нахожу. Лучшая игра.", "en": "I hide mandarins under the leaves. Then I forget where. Then I find them. Best game ever."},
 		{"at": 50, "ru": "Хвост рыжий, листья рыжие, мандарины рыжие. Кажется, я наконец на своём месте.", "en": "Orange tail, orange leaves, orange mandarins. I think I'm finally where I belong."},
+	],
+	# --- Книга 4 ---
+	"crab": [
+		{"at": 10, "ru": "Я научился ходить прямо. Два шага. Потом опять боком. Но два шага!", "en": "I learned to walk straight. Two steps. Then sideways again. But two steps!"},
+		{"at": 25, "ru": "Клешни у меня страшные, а сердце мягкое. Как у ракушки внутри.", "en": "My claws look scary, but my heart is soft. Like the inside of a shell."},
+		{"at": 50, "ru": "Раньше я прятался под камнем. Теперь мой камень — это вы.", "en": "I used to hide under a rock. Now you're my rock."},
+	],
+	"seal": [
+		{"at": 10, "ru": "Я посчитал: на льдине мне было холодно двести зим подряд. Здесь — ни одной минуты.", "en": "I counted: on the ice floe I was cold for two hundred winters in a row. Here, not for a single minute."},
+		{"at": 25, "ru": "Хлоп-хлоп. Это я аплодирую. Просто так, всем.", "en": "Clap-clap. That's me applauding. Just because. Everyone."},
+		{"at": 50, "ru": "Мой дом теперь там, где тёплая вода и вы. То есть здесь.", "en": "Home is wherever the warm water and you are. So, here."},
+	],
+	"octopus": [
+		{"at": 10, "ru": "Смотрите, я голубой! Это значит, мне спокойно.", "en": "Look, I'm blue! That means I feel calm."},
+		{"at": 25, "ru": "У меня восемь лап, и всеми восемью я вас обнимаю.", "en": "I've got eight arms, and I'm hugging you with all eight."},
+		{"at": 50, "ru": "Я больше не серый. Я теперь цвета «дома».", "en": "I'm not grey anymore. Now I'm the color of \"home\"."},
+	],
+	"flamingo": [
+		{"at": 10, "ru": "Мы с журавлём стоим на одной ноге уже час. Кто первый моргнёт — тот моет чашки.", "en": "Crane and I have been standing on one leg for an hour. First to blink does the dishes."},
+		{"at": 25, "ru": "Я розовая, потому что ем креветок. А счастливая — потому что вы рядом.", "en": "I'm pink because I eat shrimp. And happy because you're here."},
+		{"at": 50, "ru": "Оказывается, сидеть спокойно — это тоже веселье. Только тихое.", "en": "Turns out sitting still is fun too. Just the quiet kind."},
+	],
+	"lemur": [
+		{"at": 10, "ru": "Я танцевал сто лет. Можно я теперь сто лет полежу?", "en": "I danced for a hundred years. Can I lie down for a hundred now?"},
+		{"at": 25, "ru": "Мой хвост длиннее меня. Я им укрываюсь, как одеялом.", "en": "My tail is longer than I am. I use it as a blanket."},
+		{"at": 50, "ru": "Тихий час — лучшее, что случилось с джунглями. Даже барабаны спят.", "en": "Quiet hour is the best thing that ever happened to the jungle. Even the drums are asleep."},
+	],
+	"quokka": [
+		{"at": 10, "ru": "Сегодня я улыбаюсь не для других. Для себя. Так приятнее.", "en": "Today I'm smiling for me, not for others. It feels nicer."},
+		{"at": 25, "ru": "Мне всё ещё иногда страшно. Но теперь есть кому об этом сказать.", "en": "I still get scared sometimes. But now I have someone to tell."},
+		{"at": 50, "ru": "Говорят, я самый счастливый зверь на свете. Теперь это правда.", "en": "They say I'm the happiest animal in the world. Now it's actually true."},
+	],
+	"axolotl": [
+		{"at": 10, "ru": "Я светюсь в темноте. Удобно: меня никогда не теряют.", "en": "I glow in the dark. Handy: nobody ever loses me."},
+		{"at": 25, "ru": "Тысячу лет я сторожил огонь один. Теперь нас сторожит целая компания.", "en": "For a thousand years I guarded the fire alone. Now a whole crowd guards it with me."},
+		{"at": 50, "ru": "Вулкан передаёт: «Спасибо». Он стесняется сказать сам.", "en": "The Volcano says \"thank you\". He's too shy to say it himself."},
+	],
+	"whale": [
+		{"at": 10, "ru": "Я ещё маленький. Всего с автобус. Мама говорит, я вырасту с дом.", "en": "I'm still little. Only the size of a bus. Mom says I'll grow as big as a house."},
+		{"at": 25, "ru": "Я пою песню, которую слышно на другом конце моря. Сейчас там все улыбаются.", "en": "I sing a song you can hear across the whole sea. Everyone over there is smiling right now."},
+		{"at": 50, "ru": "Если соскучитесь по острову — садитесь мне на спину. Довезу за ночь.", "en": "If you ever miss the island, hop on my back. I'll get you there overnight."},
 	],
 }
 
@@ -370,6 +444,14 @@ const CAPY_THOUGHTS_FRIENDS: Array = [
 	{"f": "crane", "ru": "Журавль стоит на одной ноге уже час. Я лежу на всех четырёх. Баланс.", "en": "Crane has been standing on one leg for an hour. I'm lying on all four. Balance."},
 	{"f": "turtle", "ru": "Черепаха обогнала ленивца. Это была очень напряжённая неделя.", "en": "Turtle overtook Sloth. It was a very tense week."},
 	{"f": "fox", "ru": "Лиса спрятала мандарин. Кажется, у меня на голове.", "en": "Fox hid a mandarin. I think it's on my head."},
+	{"f": "crab", "ru": "Краб идёт ко мне боком уже пять минут. Я подожду.", "en": "Crab has been walking toward me sideways for five minutes. I'll wait."},
+	{"f": "seal", "ru": "Тюлень хлопает ластами, когда кто-то заходит в воду. Очень приятно.", "en": "Seal claps his flippers whenever someone gets in the water. Very nice."},
+	{"f": "octopus", "ru": "Осьминог стал оранжевым. Кажется, это цвет мандарина. Или зависти.", "en": "Octopus turned orange. I think that's mandarin color. Or envy."},
+	{"f": "flamingo", "ru": "Фламинго и журавль спорят, кто дольше простоит на одной ноге. Третий день.", "en": "Flamingo and Crane are arguing about who can stand on one leg longer. Day three."},
+	{"f": "lemur", "ru": "Лемур укрылся хвостом и уснул. Завидую.", "en": "Lemur tucked himself in with his tail and fell asleep. Jealous."},
+	{"f": "quokka", "ru": "Квокка улыбается. По-настоящему. Я проверила.", "en": "Quokka is smiling. For real. I checked."},
+	{"f": "axolotl", "ru": "Аксолотль светится, и ночью мне не нужен фонарик.", "en": "Axolotl glows, so I don't need a lantern at night."},
+	{"f": "whale", "ru": "Китёнок не помещается в источник. Он плавает рядом и пускает фонтанчики.", "en": "Baby Whale doesn't fit in the spring. He floats nearby and makes little fountains."},
 ]
 
 # Бонус: мысли, которые появляются только во второй книге ("ch" — минимальный индекс главы).
@@ -390,6 +472,15 @@ const CAPY_THOUGHTS_BOOK2: Array = [
 	{"ch": 21, "ru": "Осень стесняется. Я тоже стеснялась, пока не залезла в воду.", "en": "Autumn is shy. I was shy too, until I got into the water."},
 	{"ch": 22, "ru": "Мандарины созревают осенью. Значит, Осень — мой самый вкусный друг.", "en": "Mandarins ripen in autumn. So Autumn is my tastiest friend."},
 	{"ch": 23, "ru": "Все четверо в источнике. Места хватило. Я же говорила.", "en": "All four of them in the spring. There was enough room. Told you."},
+	{"ch": 24, "ru": "Вода чуть остыла. Совсем чуть-чуть. Но я заметила.", "en": "The water got a little cooler. Just a little. But I noticed."},
+	{"ch": 24, "ru": "Плот из бамбука. Если что, его можно съесть. Шучу. Панда, положи.", "en": "A bamboo raft. Edible in an emergency. Kidding. Panda, put it down."},
+	{"ch": 25, "ru": "Горячая ванна посреди моря. Вот это я понимаю — путешествие.", "en": "A hot tub in the middle of the sea. Now that's how you travel."},
+	{"ch": 26, "ru": "Кораллы порозовели. Работает даже под водой.", "en": "The corals turned pink. Works underwater too."},
+	{"ch": 27, "ru": "Здесь никогда не было зимы. Даже не знаю, завидовать или жалеть.", "en": "There's never been winter here. Not sure whether to envy them or feel sorry."},
+	{"ch": 28, "ru": "Тихий час в джунглях. Слышно, как растут бананы.", "en": "Quiet hour in the jungle. You can hear the bananas growing."},
+	{"ch": 29, "ru": "Чай с вулканических склонов. Пахнет теплом и немного дымом.", "en": "Tea from the volcano slopes. Smells like warmth and a little smoke."},
+	{"ch": 30, "ru": "Вулкану просто нужно было, чтобы кто-то посидел рядом. Как всем.", "en": "The Volcano just needed someone to sit with him. Like everyone does."},
+	{"ch": 31, "ru": "Маяк мигнул. Вулкан мигнул в ответ. Спокойной ночи, остров.", "en": "The lighthouse blinked. The Volcano blinked back. Good night, island."},
 ]
 
 
