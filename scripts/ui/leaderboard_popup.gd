@@ -19,6 +19,7 @@ func _init(popups_node: Control, online_node: Node) -> void:
 func _panel(replace: bool) -> VBoxContainer:
 	var vb: VBoxContainer = popups.open_panel(replace)
 	vb.custom_minimum_size = Vector2(minf(560.0, popups.size.x - 80.0), 0)
+	_clear_html_fields()   # поля прошлой формы
 	_fields = {}
 	return vb
 
@@ -110,31 +111,83 @@ func _field(vb: VBoxContainer, key: String, hint: String, secret: bool = false) 
 	e.add_theme_stylebox_override("focus", K.sb(Color.WHITE, 12, 10))
 	e.add_theme_color_override("font_color", K.C_BROWN)
 	e.add_theme_color_override("font_placeholder_color", K.C_BROWN_SOFT)
-	if use_browser_prompt():
-		# Браузер на телефоне: Godot сам не открывает экранную клавиатуру,
-		# поэтому по нажатию спрашиваем текст системным окном браузера
-		e.virtual_keyboard_enabled = false
+	if use_html_fields():
+		# Браузер на телефоне: Godot сам не открывает экранную клавиатуру. Поверх поля
+		# кладём настоящее HTML-поле: палец попадает прямо в него, и клавиатура открывается.
+		e.placeholder_text = ""
 		e.focus_mode = Control.FOCUS_NONE
-		e.gui_input.connect(_on_field_input.bind(e, hint))
+		e.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		e.set_meta("html_type", "password" if secret else ("email" if key == "email" else "text"))
+		e.set_meta("html_hint", hint)
+		_ensure_html_timer()
 	vb.add_child(e)
 	_fields[key] = e
 
 
 ## Веб-версия на сенсорном экране (телефон, планшет).
-static func use_browser_prompt() -> bool:
+static func use_html_fields() -> bool:
 	return OS.has_feature("web") and DisplayServer.is_touchscreen_available()
 
 
-func _on_field_input(ev: InputEvent, e: LineEdit, hint: String) -> void:
-	if not (ev is InputEventMouseButton and not ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT):
+const HTML_JS: String = """
+window.capyField = function(id, type, ph, x, y, w, h, winW, fs) {
+	var c = document.getElementById("canvas") || document.querySelector("canvas");
+	var r = c.getBoundingClientRect(); var k = r.width / winW;
+	var el = document.getElementById(id);
+	if (!el) {
+		el = document.createElement("input"); el.id = id; el.className = "capyf"; el.type = type;
+		el.placeholder = ph; el.maxLength = 128; el.spellcheck = false;
+		el.setAttribute("autocapitalize", "off"); el.setAttribute("autocorrect", "off");
+		el.autocomplete = type == "password" ? "new-password" : (type == "email" ? "email" : "off");
+		el.style.cssText = "position:fixed;z-index:10;box-sizing:border-box;border:none;outline:none;border-radius:8px;background:#fff;color:#5b3a22;padding:0 12px;margin:0;font-family:Nunito,Arial,sans-serif;";
+		el.addEventListener("keydown", function(ev) { ev.stopPropagation(); if (ev.key == "Enter") el.blur(); });
+		document.body.appendChild(el);
+	}
+	el.style.left = (r.left + x * k) + "px"; el.style.top = (r.top + y * k) + "px";
+	el.style.width = (w * k) + "px"; el.style.height = (h * k) + "px";
+	el.style.fontSize = Math.max(16, fs * k) + "px";
+};
+window.capyFieldsClear = function() { document.querySelectorAll(".capyf").forEach(function(e) { e.remove(); }); };
+"""
+
+var _html_timer: Timer
+
+
+func _ensure_html_timer() -> void:
+	if _html_timer != null and is_instance_valid(_html_timer):
 		return
-	e.accept_event()
-	# Пароль в окне браузера не показываем заранее; остальные поля — с текущим текстом
-	var start: String = "" if e.secret else e.text
-	var js: String = "(function(){var v=window.prompt(%s,%s);return v===null?null:String(v);})()" % [JSON.stringify(hint), JSON.stringify(start)]
-	var v = JavaScriptBridge.eval(js, true)
-	if v is String and is_instance_valid(e):
-		e.text = (v as String).strip_edges().left(128)
+	JavaScriptBridge.eval(HTML_JS, true)
+	_html_timer = Timer.new()
+	_html_timer.wait_time = 0.1
+	_html_timer.timeout.connect(_sync_html_fields)
+	popups.add_child(_html_timer)
+	_html_timer.start()
+
+
+## Каждые 0,1 с ставим HTML-поля точно поверх полей окна (окно появляется с анимацией).
+## Окно закрыли — поля убираем.
+func _sync_html_fields() -> void:
+	var alive: bool = false
+	var win: float = float(DisplayServer.window_get_size().x)
+	for key in _fields:
+		var e: LineEdit = _fields[key]
+		if not is_instance_valid(e) or not e.is_visible_in_tree() or not e.has_meta("html_type"):
+			continue
+		alive = true
+		var xf: Transform2D = e.get_viewport().get_screen_transform() * e.get_global_transform_with_canvas()
+		var sz: Vector2 = e.size * xf.get_scale()
+		JavaScriptBridge.eval("capyField(%s,%s,%s,%f,%f,%f,%f,%f,%f)" % [JSON.stringify("capyf_" + key), JSON.stringify(e.get_meta("html_type")),
+			JSON.stringify(e.get_meta("html_hint")), xf.origin.x, xf.origin.y, sz.x, sz.y, win, 20.0 * xf.get_scale().x])
+	if not alive:
+		_clear_html_fields()
+
+
+func _clear_html_fields() -> void:
+	if _html_timer != null and is_instance_valid(_html_timer):
+		_html_timer.queue_free()
+	_html_timer = null
+	if use_html_fields():
+		JavaScriptBridge.eval("if (window.capyFieldsClear) capyFieldsClear();", true)
 
 
 func _form(title: String, replace: bool) -> VBoxContainer:
@@ -176,7 +229,13 @@ func show_code(replace: bool = true) -> void:
 
 
 func _val(key: String) -> String:
-	return (_fields[key] as LineEdit).text.strip_edges() if _fields.has(key) else ""
+	if not _fields.has(key):
+		return ""
+	var e: LineEdit = _fields[key]
+	if is_instance_valid(e) and e.has_meta("html_type"):
+		var v = JavaScriptBridge.eval("(function(){var el=document.getElementById(%s);return el?el.value:\"\";})()" % JSON.stringify("capyf_" + key), true)
+		return str(v).strip_edges().left(128) if v != null else ""
+	return e.text.strip_edges()
 
 
 ## Ник: 3–20 символов, только буквы, цифры, _ - . (без @: никто случайно не
