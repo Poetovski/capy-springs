@@ -21,6 +21,7 @@
 - 8 more seats in the pool, so all 32 friends fit around Capy.
 
 ### Fixes
+- Chapter 16, "The First Spring", now brings a new friend: the bear moved there from chapter 15. A friend from a later chapter shows "Chapter N" instead of a price that looked buyable but wasn't.
 - **Signing up from a phone finally works.** In the web build, tapping the nickname, email or password field didn't bring up the phone keyboard, so you could only sign up from a computer. On touch screens the fields are now real browser inputs, so a tap opens the keyboard right away, on Android and iPhone.
 
 ### Under the hood

@@ -63,7 +63,7 @@ const HELPERS: Array = [
 		"ru": "Жираф", "en": "Giraffe",
 		"line_ru": "Сверху видно, где спит Весна. Совсем рядом с небом.",
 		"line_en": "From up here I can see where Spring sleeps. Right next to the sky."},
-	{"icon": "bear", "cost": 135000000000000000000.0, "zps": 2400000000000.0, "chapter_req": 14,
+	{"icon": "bear", "cost": 135000000000000000000.0, "zps": 2400000000000.0, "chapter_req": 15,
 		"ru": "Медведь", "en": "Bear",
 		"line_ru": "Я берёг её сон. Но, кажется, мы оба проспали.",
 		"line_en": "I was watching over her sleep. But I think we both overslept."},
@@ -313,6 +313,7 @@ const STRINGS: Dictionary = {
 	"book4_title": {"ru": "Книга четвёртая · Остров за морем", "en": "Book Four · The Island Beyond the Sea"},
 	"locked_hint_book4": {"ru": "Кто-то машет тебе с гребня волны...", "en": "Someone is waving at you from the crest of a wave..."},
 	"owned_cap": {"ru": "x%d из %d · %s/с", "en": "x%d of %d · %s/s"},
+	"friend_comes": {"ru": "Придёт в главе %d", "en": "Arrives in chapter %d"},
 	"cap_full": {"ru": "Мест нет", "en": "No room"},
 	"cap_hint": {"ru": "В источнике больше нет места. В следующей главе станет просторнее.", "en": "No more room in the spring. It gets roomier in the next chapter."},
 	# --- Онлайн-топ ---
