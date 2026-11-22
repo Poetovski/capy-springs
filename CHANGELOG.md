@@ -20,6 +20,9 @@
 - 7 new "all friends" upgrades, 2 new tap upgrades and 9 new achievements.
 - 8 more seats in the pool, so all 32 friends fit around Capy.
 
+### Fixes
+- **Signing up from a phone finally works.** In the web build, tapping the nickname, email or password field didn't bring up the phone keyboard, so you could only sign up from a computer. On touch screens a tap now opens the browser's input box with the keyboard, on Android and iPhone.
+
 ### Under the hood
 - New tests for Book Four (data, progression, pool seats, pictures, Story tab). All 7 test suites pass.
 - Chapter pictures are stored as compressed JPG (about 2 MB for all 32), so the web build stays small.
