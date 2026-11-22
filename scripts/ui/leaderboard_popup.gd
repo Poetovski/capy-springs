@@ -110,8 +110,31 @@ func _field(vb: VBoxContainer, key: String, hint: String, secret: bool = false) 
 	e.add_theme_stylebox_override("focus", K.sb(Color.WHITE, 12, 10))
 	e.add_theme_color_override("font_color", K.C_BROWN)
 	e.add_theme_color_override("font_placeholder_color", K.C_BROWN_SOFT)
+	if use_browser_prompt():
+		# Браузер на телефоне: Godot сам не открывает экранную клавиатуру,
+		# поэтому по нажатию спрашиваем текст системным окном браузера
+		e.virtual_keyboard_enabled = false
+		e.focus_mode = Control.FOCUS_NONE
+		e.gui_input.connect(_on_field_input.bind(e, hint))
 	vb.add_child(e)
 	_fields[key] = e
+
+
+## Веб-версия на сенсорном экране (телефон, планшет).
+static func use_browser_prompt() -> bool:
+	return OS.has_feature("web") and DisplayServer.is_touchscreen_available()
+
+
+func _on_field_input(ev: InputEvent, e: LineEdit, hint: String) -> void:
+	if not (ev is InputEventMouseButton and not ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT):
+		return
+	e.accept_event()
+	# Пароль в окне браузера не показываем заранее; остальные поля — с текущим текстом
+	var start: String = "" if e.secret else e.text
+	var js: String = "(function(){var v=window.prompt(%s,%s);return v===null?null:String(v);})()" % [JSON.stringify(hint), JSON.stringify(start)]
+	var v = JavaScriptBridge.eval(js, true)
+	if v is String and is_instance_valid(e):
+		e.text = (v as String).strip_edges().left(128)
 
 
 func _form(title: String, replace: bool) -> VBoxContainer:
