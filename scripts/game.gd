@@ -32,6 +32,8 @@ var mandarins: int = 0
 var naps: int = 0
 var lang: String = "ru"
 var friends_met: Dictionary = {}
+## Сколько дзена каждый друг принёс за всё время (не сбрасывается Великим Сном).
+var friend_earned: Array = []
 var golden_caught: int = 0
 var upgrades_bought: int = 0
 var ach_claimed: Dictionary = {}
@@ -62,6 +64,7 @@ var _paused: bool = false
 
 func _ready() -> void:
 	var loc: String = OS.get_locale_language()
+	_reset_friend_earned()
 	lang = "ru" if loc in ["ru", "uk", "be", "kk"] else "en"
 	upgrade_list = D.build_upgrades()
 	_reset_run()
@@ -94,6 +97,7 @@ func _process(delta: float) -> void:
 	var z: float = zps()
 	if z > 0.0:
 		earn(z * delta)
+		credit_friends(z * delta)
 	_ach_timer += delta
 	if _ach_timer >= 1.0:
 		_ach_timer = 0.0
@@ -149,10 +153,50 @@ func claim_offline() -> float:
 	pending_offline = 0.0
 	if g > 0.0:
 		earn(g)
+		credit_friends(g)
 	return g
 
 
 # ---------- экономика ----------
+
+func _reset_friend_earned() -> void:
+	friend_earned = []
+	for i in D.HELPERS.size():
+		friend_earned.append(0.0)
+
+
+## Доход друга сейчас (в секунду, без мандаринов и вихря: для сравнения друзей между собой).
+func helper_income(i: int) -> float:
+	return helper_zps_each(i) * float(owned[i])
+
+
+## Раздать пассивный доход друзьям пропорционально их вкладу (для статистики).
+func credit_friends(amount: float) -> void:
+	if base_zps <= 0.0 or amount <= 0.0 or not is_finite(amount):
+		return
+	for i in D.HELPERS.size():
+		if int(owned[i]) > 0:
+			friend_earned[i] += amount * helper_income(i) / base_zps
+
+
+## Лучший приятель: друг, который прямо сейчас даёт больше всего дзена. -1 — друзей нет.
+func best_buddy() -> int:
+	var best: int = -1
+	var top: float = 0.0
+	for i in D.HELPERS.size():
+		var v: float = helper_income(i)
+		if v > top:
+			top = v
+			best = i
+	return best
+
+
+## Доля лучшего приятеля в доходе друзей, 0..100.
+func buddy_share(i: int) -> int:
+	if i < 0 or base_zps <= 0.0:
+		return 0
+	return clampi(int(round(helper_income(i) / base_zps * 100.0)), 0, 100)
+
 
 func recalc() -> void:
 	helper_mult = []
@@ -407,7 +451,7 @@ func save_game() -> void:
 		"mandarins": mandarins, "naps": naps, "lang": lang, "friends": friends_met.keys(),
 		"time": _now(), "seen": last_seen_time,
 		"golden": golden_caught, "ups": upgrades_bought, "ach": ach_claimed.keys(),
-		"music": music_vol, "sfx": sfx_vol,
+		"music": music_vol, "sfx": sfx_vol, "fe": friend_earned,
 	}
 	var text: String = JSON.stringify(data, "", false, true)
 	var f: FileAccess = FileAccess.open(SAVE_TMP, FileAccess.WRITE)
@@ -499,6 +543,10 @@ func load_game() -> void:
 	ach_claimed = {}
 	for k in _arr(d.get("ach")):
 		ach_claimed[str(k)] = true
+	_reset_friend_earned()
+	var fe: Array = _arr(d.get("fe"))
+	for i in mini(fe.size(), friend_earned.size()):
+		friend_earned[i] = maxf(0.0, _num(fe[i]))
 	music_vol = clampf(_num(d.get("music"), music_vol), 0.0, 1.0)
 	sfx_vol = clampf(_num(d.get("sfx"), sfx_vol), 0.0, 1.0)
 	# Глава выводится из all_total: сохранённый индекс может не совпасть,
@@ -519,6 +567,7 @@ func wipe() -> void:
 	naps = 0
 	friends_met = {}
 	golden_caught = 0
+	_reset_friend_earned()
 	upgrades_bought = 0
 	ach_claimed = {}
 	_ach_ready_seen = {}

@@ -250,6 +250,7 @@ const ACHIEVEMENTS: Array = [
 	{"id": "gold_500", "stat": "golden", "goal": 500, "ru": "Мандариновый остров", "en": "Mandarin Island", "d_ru": "Поймать 500 золотых мандаринов", "d_en": "Catch 500 golden mandarins"},
 	{"id": "nap_100", "stat": "naps", "goal": 100, "ru": "Сто снов", "en": "A Hundred Dreams", "d_ru": "Уснуть Великим Сном 100 раз", "d_en": "Take 100 Great Naps"},
 	{"id": "fr_5000", "stat": "friends", "goal": 5000, "ru": "Целый остров", "en": "A Whole Island", "d_ru": "Позвать 5 000 друзей", "d_en": "Invite 5,000 friends"},
+	{"id": "tap_1m", "stat": "taps", "goal": 1000000, "ru": "Миллион касаний", "en": "A Million Taps", "d_ru": "Нажать на Капи 1 000 000 раз", "d_en": "Tap Capy 1,000,000 times"},
 ]
 
 const STRINGS: Dictionary = {
@@ -313,6 +314,12 @@ const STRINGS: Dictionary = {
 	"book4_title": {"ru": "Книга четвёртая · Остров за морем", "en": "Book Four · The Island Beyond the Sea"},
 	"locked_hint_book4": {"ru": "Кто-то машет тебе с гребня волны...", "en": "Someone is waving at you from the crest of a wave..."},
 	"owned_cap": {"ru": "x%d из %d · %s/с", "en": "x%d of %d · %s/s"},
+	"best_buddy": {"ru": "Лучший приятель: %s · %d%% дзена", "en": "Best buddy: %s · %d%% of zen"},
+	"stats_title": {"ru": "Статистика", "en": "Statistics"},
+	"stats_more": {"ru": "Золотых мандаринов: %d\nКуплено улучшений: %d\nНаград: %d из %d", "en": "Golden mandarins: %d\nUpgrades bought: %d\nAwards: %d of %d"},
+	"stats_friends": {"ru": "Сколько дзена принёс каждый друг", "en": "Zen brought by each friend"},
+	"stats_now": {"ru": "сейчас %s/с", "en": "now %s/s"},
+	"stats_empty": {"ru": "Пока никого нет. Позови первого друга!", "en": "Nobody yet. Invite your first friend!"},
 	"friend_comes": {"ru": "Придёт в главе %d", "en": "Arrives in chapter %d"},
 	"cap_full": {"ru": "Мест нет", "en": "No room"},
 	"cap_hint": {"ru": "В источнике больше нет места. В следующей главе станет просторнее.", "en": "No more room in the spring. It gets roomier in the next chapter."},

@@ -14,6 +14,7 @@ const Popups = preload("res://scripts/ui/popups.gd")
 const Audio = preload("res://scripts/ui/audio.gd")
 const Online = preload("res://scripts/net/talo_client.gd")
 const LeaderboardPopup = preload("res://scripts/ui/leaderboard_popup.gd")
+const StatsPopup = preload("res://scripts/ui/stats_popup.gd")
 const TABS: Array = [
 	["tab_friends", preload("res://scripts/ui/tabs/friends_tab.gd")],
 	["tab_upgrades", preload("res://scripts/ui/tabs/upgrades_tab.gd")],
@@ -37,6 +38,7 @@ var popups: Control
 var audio: Node
 var online: Node                 # онлайн-топ (Talo)
 var leaderboard: RefCounted
+var stats: RefCounted
 var top_btn: TextureButton
 var margin: MarginContainer
 var top_panel: PanelContainer
@@ -44,6 +46,10 @@ var place_label: Label
 var zen_label: Label
 var zps_label: Label
 var mandarin_label: Label
+var buddy_btn: Button
+var buddy_icon: TextureRect
+var buddy_label: Label
+var last_buddy: int = -2
 var chapter_bar: ProgressBar
 var chapter_bar_label: Label
 var gear_btn: TextureButton
@@ -170,6 +176,8 @@ func _build_ui() -> void:
 	gear_btn.pressed.connect(popups.show_settings)
 	# Кнопка онлайн-топа в левом верхнем углу верхней панели
 	leaderboard = LeaderboardPopup.new(popups, online)
+	stats = StatsPopup.new(popups, stage)
+	popups.stats_requested.connect(stats.show_stats)
 	top_btn = TextureButton.new()
 	top_btn.texture_normal = K.tex("trophy")
 	top_btn.ignore_texture_size = true
@@ -195,6 +203,26 @@ func _build_top_panel() -> PanelContainer:
 	tv.add_child(zps_label)
 	mandarin_label = K.label("", 19, K.C_MANDARIN, true)
 	tv.add_child(mandarin_label)
+	# Лучший приятель: кто из друзей сейчас даёт больше всего дзена (нажать — статистика)
+	buddy_btn = Button.new()
+	buddy_btn.flat = true
+	buddy_btn.focus_mode = Control.FOCUS_NONE
+	buddy_btn.custom_minimum_size = Vector2(0, 36)
+	var bc: CenterContainer = CenterContainer.new()
+	bc.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	buddy_btn.add_child(bc)
+	bc.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var bh: HBoxContainer = K.hbox(8)
+	bh.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bc.add_child(bh)
+	buddy_icon = K.icon(null, 32)
+	bh.add_child(buddy_icon)
+	buddy_label = K.label("", 18, K.C_BROWN)
+	buddy_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bh.add_child(buddy_label)
+	buddy_btn.visible = false
+	buddy_btn.pressed.connect(func(): stats.show_stats())
+	tv.add_child(buddy_btn)
 	# Прогресс до следующей главы
 	var pb: VBoxContainer = K.vbox(2)
 	tv.add_child(pb)
@@ -317,10 +345,23 @@ func _refresh() -> void:
 	mandarin_label.visible = Game.mandarins > 0
 	if Game.mandarins > 0:
 		mandarin_label.text = Game.txt("mandarins") % [Game.mandarins, Game.mandarin_pct()]
+	_refresh_buddy()
 	_refresh_chapter_bar()
 	if Game.ach_claimable_count() != last_claimable:
 		update_tab_titles()
 	tabs[current_tab].refresh()
+
+
+func _refresh_buddy() -> void:
+	var b: int = Game.best_buddy()
+	buddy_btn.visible = b >= 0
+	if b != last_buddy:
+		last_buddy = b
+		stage.set_buddy(b)
+		if b >= 0:
+			buddy_icon.texture = stage.friend_tex[D.HELPERS[b]["icon"]]
+	if b >= 0:
+		buddy_label.text = Game.txt("best_buddy") % [str(D.HELPERS[b][Game.lang]), Game.buddy_share(b)]
 
 
 ## Полоска до следующей главы: в логарифмах, т.к. пороги растут в десятки раз.

@@ -4,6 +4,7 @@ extends Control
 
 signal lang_toggled
 signal reset_confirmed
+signal stats_requested
 
 const K = preload("res://scripts/ui/ui_kit.gd")
 const GUARD_TIME: float = 0.5   # с: «Дальше» не нажимается случайным тапом по Капи
@@ -65,6 +66,7 @@ func show_settings() -> void:
 	vb.add_child(_volume_row(Game.txt("music"), Game.music_vol, _on_music_vol))
 	vb.add_child(_volume_row(Game.txt("sounds"), Game.sfx_vol, _on_sfx_vol))
 	vb.add_child(K.button(Game.txt("lang"), K.C_BLUE, 20, Vector2(0, 58), _on_lang))
+	vb.add_child(K.button(Game.txt("stats_title"), K.C_ORANGE, 20, Vector2(0, 58), func(): stats_requested.emit()))
 	var rb: Button = K.button(Game.txt("reset"), K.C_RED, 18, Vector2(0, 50), func(): pass)
 	rb.pressed.connect(_on_reset.bind(rb))
 	vb.add_child(rb)

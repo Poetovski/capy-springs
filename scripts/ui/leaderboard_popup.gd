@@ -124,9 +124,15 @@ func _field(vb: VBoxContainer, key: String, hint: String, secret: bool = false) 
 	_fields[key] = e
 
 
-## Веб-версия на сенсорном экране (телефон, планшет).
+## Веб-версия на сенсорном экране (телефон, планшет). Кроме Godot спрашиваем и сам браузер:
+## внутри окошка itch.io Godot не всегда видит сенсор.
 static func use_html_fields() -> bool:
-	return OS.has_feature("web") and DisplayServer.is_touchscreen_available()
+	if not OS.has_feature("web"):
+		return false
+	if DisplayServer.is_touchscreen_available():
+		return true
+	var js = JavaScriptBridge.eval("(navigator.maxTouchPoints > 0) || ('ontouchstart' in window) || (window.matchMedia && matchMedia('(pointer: coarse)').matches)", true)
+	return js == true
 
 
 const HTML_JS: String = """

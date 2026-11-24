@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.4 — Friends' feedback
+
+### New
+- **Best buddy.** The top panel shows which friend brings the most zen right now and their share. That friend wears a crown in the pool, and the crown moves when someone else takes the lead.
+- **Statistics.** Tap the best buddy line (or Settings → Statistics) to see how much zen each friend has brought over the whole game, how much each gives now, and totals for taps, Great Naps, golden mandarins and awards. Friend stats survive a Great Nap.
+- **"A Million Taps"** achievement for tapping Capy 1,000,000 times.
+
+### Changes
+- **Bigger tap area on Capy.** It used to be 5% smaller than the picture; now taps a little around Capy count too (about 1.4 times the picture, still inside the scene).
+- On phones, sign-up fields also check the browser itself for a touch screen.
+
+### Under the hood
+- New test suite for 1.4 (best buddy, friend stats, save and load, nap and erase, tap area, statistics window). All 8 suites pass (312 checks).
+
 ## 1.3 — "The Island Beyond the Sea"
 
 ### Story

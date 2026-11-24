@@ -172,14 +172,20 @@ func layout() -> void:
 	capy_mandarin.position = Vector2(w * 0.5 - ms * 0.5, h * (70.0 / 360.0) - ms * 0.82)
 	steam.position = Vector2(a.x * 0.5, capy_holder.position.y + h * 0.85)
 	_layout_chill(w, h)
+	_place_crown()
 	buff_label.position = Vector2.ZERO
 	buff_label.size = Vector2(a.x, 30)
 	thought_panel.size = Vector2(minf(a.x - 40.0, 460.0), 0)
 	thought_panel.position = Vector2((a.x - thought_panel.size.x) * 0.5, maxf(34.0, capy_holder.position.y - 64.0))
 
 
+## Куда можно тапать: Капи с запасом 8% ширины со всех сторон (раньше было на 5% меньше
+## картинки — по отзывам, по ней было трудно попасть), но не за пределами сцены.
+const TAP_MARGIN: float = 0.08
+
+
 func capy_rect() -> Rect2:
-	return capy_holder.get_global_rect().grow(-capy_holder.size.x * 0.05)
+	return capy_holder.get_global_rect().grow(capy_holder.size.x * TAP_MARGIN).intersection(get_global_rect())
 
 
 func golden_rect() -> Rect2:
@@ -213,6 +219,9 @@ func sync_friends() -> void:
 			chill_sprites.erase(i)
 	pool_rect.visible = not chill_sprites.is_empty()
 	layout()
+	# Спрайт лучшего приятеля мог появиться позже, чем он стал лучшим, — повесить корону
+	if buddy >= 0 and (crown == null or not is_instance_valid(crown) or crown.get_parent() == null):
+		set_buddy(buddy)
 
 
 func _layout_chill(w: float, h: float) -> void:
@@ -433,3 +442,37 @@ func celebrate(big: bool = false) -> void:
 	add_child(p)
 	p.emitting = true
 	p.finished.connect(p.queue_free)
+
+
+# ---------- лучший приятель ----------
+
+var crown: TextureRect
+var buddy: int = -1
+
+
+## Корона над головой лучшего приятеля (друг с самым большим доходом). -1 — убрать.
+func set_buddy(i: int) -> void:
+	buddy = i
+	if crown == null or not is_instance_valid(crown):
+		crown = K.icon(K.tex("crown"), 10)
+		crown.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if crown.get_parent() != null:
+		crown.get_parent().remove_child(crown)
+	if i < 0 or not chill_sprites.has(i):
+		return
+	var head: TextureRect = chill_sprites[i].get_meta("head")
+	head.add_child(crown)
+	_place_crown()
+	crown.scale = Vector2(0.2, 0.2)
+	crown.pivot_offset = crown.size * 0.5
+	create_tween().tween_property(crown, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+func _place_crown() -> void:
+	if crown == null or not is_instance_valid(crown) or crown.get_parent() == null:
+		return
+	var head: TextureRect = crown.get_parent()
+	var cs: float = head.size.x * 0.55
+	crown.size = Vector2(cs, cs * 0.75)
+	crown.pivot_offset = crown.size * 0.5
+	crown.position = Vector2((head.size.x - cs) * 0.5, -cs * 0.5)
